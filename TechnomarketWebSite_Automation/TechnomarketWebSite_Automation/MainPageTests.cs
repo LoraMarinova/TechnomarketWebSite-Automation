@@ -16,27 +16,11 @@ using TechnomarketWebSite_Automation.Pages.MainPage;
 namespace TechnomarketWebSite_Automation
 {
     [TestFixture]
-    public class MainPageTests
-    {
-       
-
-        [SetUp]
-        public void SetUp()
-        {
-            Driver.StartBrowser();
-           
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            Driver.StopBrowser();
-        }
-
+    public class MainPageTests : BaseTests
+    { 
         [Test]
         public void VerifyMainPageTitle()
-        {
-            MainPage mainPage = new MainPage();
+        {            
             mainPage.Navigate();
             string mainPageTitle = mainPage.GetTitleOfPage();
             mainPage.Validate().VeifyTitleOfMainPage(mainPageTitle);
@@ -44,8 +28,7 @@ namespace TechnomarketWebSite_Automation
 
         [Test]
         public void VerifyLogoIsPresentedOnTheMainPage()
-        {
-            MainPage mainPage = new MainPage();
+        {           
             mainPage.Navigate();
             mainPage.Validate().VerifyLogoIsDisplayedOnTheMainPage();
         }

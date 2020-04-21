@@ -1,4 +1,8 @@
 ﻿
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using TechnomarketWebSite_Automation.Enums;
+
 namespace TechnomarketWebSite_Automation.Core
 {
     public class BasePage<M>
@@ -22,6 +26,7 @@ namespace TechnomarketWebSite_Automation.Core
         public void Navigate()
         {
             Driver.Browser.Navigate().GoToUrl(this.url);
+            Driver.BrowserWait.Until(driver1 => ((IJavaScriptExecutor)Driver.Browser).ExecuteScript("return document.readyState").Equals("complete"));
         }
     }
 
@@ -43,6 +48,9 @@ namespace TechnomarketWebSite_Automation.Core
         {
             return Driver.Browser.Title;
         }
+
+        
+        
     }
 
 }

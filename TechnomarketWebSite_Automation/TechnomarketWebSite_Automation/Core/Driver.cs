@@ -42,7 +42,7 @@ namespace TechnomarketWebSite_Automation.Core
             }
         }
 
-        public static void StartBrowser(BrowserTypes browserType = BrowserTypes.Chrome, int defaultTime = 20)
+        public static void StartBrowser(BrowserTypes browserType = BrowserTypes.Chrome, int defaultTime = 30)
         {
             switch (browserType)
             {
@@ -57,7 +57,7 @@ namespace TechnomarketWebSite_Automation.Core
                     break;
             }
             BrowserWait = new WebDriverWait(Browser, TimeSpan.FromSeconds(defaultTime));
-            Browser.Manage().Window.Maximize();
+            
         }
 
         public static void StopBrowser()

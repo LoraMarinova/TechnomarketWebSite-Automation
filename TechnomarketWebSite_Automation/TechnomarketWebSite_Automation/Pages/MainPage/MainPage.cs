@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TechnomarketWebSite_Automation.Core;
+using TechnomarketWebSite_Automation.Enums;
 
 namespace TechnomarketWebSite_Automation.Pages.MainPage
 {
@@ -12,11 +13,17 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
         public MainPage() 
             : base(MainPageUrl)
         {
-        }       
+        }  
 
-        public void GoToLoginPage()
+        public void GoToLogin()
         {
             this.Map.LoginButton.Click();
         }
+
+        public void GoToCart()
+        {
+            this.Map.CartButton.Click();
+        }    
+
     }
 }
