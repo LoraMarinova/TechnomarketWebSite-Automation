@@ -18,11 +18,13 @@ namespace TechnomarketWebSite_Automation
     [TestFixture]
     public class MainPageTests
     {
+       
 
         [SetUp]
         public void SetUp()
         {
             Driver.StartBrowser();
+           
         }
 
         [TearDown]
@@ -37,7 +39,7 @@ namespace TechnomarketWebSite_Automation
             MainPage mainPage = new MainPage();
             mainPage.Navigate();
             string mainPageTitle = mainPage.GetTitleOfPage();
-            mainPage.Validate().VeifyTitleOfMainPage(mainPageTitle);            
+            mainPage.Validate().VeifyTitleOfMainPage(mainPageTitle);
         }
 
         [Test]

@@ -57,6 +57,7 @@ namespace TechnomarketWebSite_Automation.Core
                     break;
             }
             BrowserWait = new WebDriverWait(Browser, TimeSpan.FromSeconds(defaultTime));
+            Browser.Manage().Window.Maximize();
         }
 
         public static void StopBrowser()
