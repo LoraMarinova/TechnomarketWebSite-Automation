@@ -18,12 +18,14 @@ namespace TechnomarketWebSite_Automation
     [TestFixture]
     public class MainPageTests : BaseTests
     {
-
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
-            
+            // Executes once for the test class. (Optional)
         }
+
+
+
         [Test]
         public void VerifyMainPageTitle()
         {            

@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\LoginPage\" />
     <Folder Include="Pages\MobilePhonesPage\" />
-    <Folder Include="Pages\RegistrationPage\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 

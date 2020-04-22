@@ -49,8 +49,40 @@ namespace TechnomarketWebSite_Automation.Core
             return Driver.Browser.Title;
         }
 
+        public void Type(IWebElement inputField, string text)
+        {
+            inputField.Clear();
+            inputField.SendKeys(text);
+        }
+
+        public void SelectFromDropdown(IWebElement dropdown, string text)
+        {
+            SelectElement salutation = new SelectElement(dropdown);
+            salutation.SelectByText(text);
+        }
+
+        public void SelectCheckBox(IWebElement checkBox)
+        {
+            if (!checkBox.Selected)
+            {
+                checkBox.Click();
+            }
+        }
+
+        public void ClearCheckBox(IWebElement checkBox)
+        {
+            if (checkBox.Selected)
+            {
+                checkBox.Click();
+            }
+        }
+
         
-        
-    }
+
+
+
+
+
+}
 
 }
