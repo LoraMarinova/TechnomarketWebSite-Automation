@@ -20,64 +20,34 @@ namespace TechnomarketWebSite_Automation.Factories
             this.dateTimeNow = DateTime.Now.ToString(dateTimeFormatSeconds);
         }
 
-        public User CreateUserMaleWithCorrectBirthDate()
+        public User CreateUser(string gender, bool validBirthDate)
         {
             User user = new User();
             user.Email = generator.GenerateEmail(dateTimeNow);
             user.Password = generator.GeneratePassword(dateTimeNow);
-            user.Salutation = SalutationOfMaleUser;
+            if (gender.ToLower() == "male")
+            {
+                user.Salutation = SalutationOfMaleUser;
+            }
+            else
+            {
+                user.Salutation = SalutationOfFemaleUser;
+            }           
             user.FirstName = generator.GenerateFirstName(dateTimeNow);
             user.LastName = generator.GenerateLastName(dateTimeNow);
-            user.Birthdate = generator.GenerateCorrectBirthDate();
+            if (validBirthDate)
+            {
+                user.Birthdate = generator.GenerateValidBirthDate();
+            }
+            else
+            {
+                user.Birthdate = generator.GenerateInvalidBirthDate();
+            }        
+            
             user.ResivePromotionInfo = true;
             user.AgreeToProcessPersonalData = true;
             user.AcceptTerms = true;
             return user;
-        }
-
-        public User CreateUserMaleWithIncorrectBirthDate()
-        {
-            User user = new User();
-            user.Email = generator.GenerateEmail(dateTimeNow);
-            user.Password = generator.GeneratePassword(dateTimeNow);
-            user.Salutation = SalutationOfMaleUser;
-            user.FirstName = generator.GenerateFirstName(dateTimeNow);
-            user.LastName = generator.GenerateLastName(dateTimeNow);
-            user.Birthdate = generator.GenerateIncorrectBirthDate();
-            user.ResivePromotionInfo = true;
-            user.AgreeToProcessPersonalData = true;
-            user.AcceptTerms = true;
-            return user;
-        }
-
-        public User CreateUserFemaleWithCorrectBirthDate()
-        {
-            User user = new User();
-            user.Email = generator.GenerateEmail(dateTimeNow);
-            user.Password = generator.GeneratePassword(dateTimeNow);
-            user.Salutation = SalutationOfFemaleUser;
-            user.FirstName = generator.GenerateFirstName(dateTimeNow);
-            user.LastName = generator.GenerateLastName(dateTimeNow);
-            user.Birthdate = generator.GenerateCorrectBirthDate();
-            user.ResivePromotionInfo = true;
-            user.AgreeToProcessPersonalData = true;
-            user.AcceptTerms = true;
-            return user;
-        }
-
-        public User CreateUserFemaleWithIncorrectBirthDate()
-        {
-            User user = new User();
-            user.Email = generator.GenerateEmail(dateTimeNow);
-            user.Password = generator.GeneratePassword(dateTimeNow);
-            user.Salutation = SalutationOfFemaleUser;
-            user.FirstName = generator.GenerateFirstName(dateTimeNow);
-            user.LastName = generator.GenerateLastName(dateTimeNow);
-            user.Birthdate = generator.GenerateIncorrectBirthDate();
-            user.ResivePromotionInfo = true;
-            user.AgreeToProcessPersonalData = true;
-            user.AcceptTerms = true;
-            return user;
-        }
+        }       
     }
 }

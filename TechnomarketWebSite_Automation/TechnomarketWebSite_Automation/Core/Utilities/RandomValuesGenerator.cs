@@ -31,7 +31,7 @@ namespace TechnomarketWebSite_Automation.Core.Utilities
             return $"LastName{dateTimeNow}";
         }
 
-        public string GenerateCorrectBirthDate()
+        public string GenerateValidBirthDate()
         {
             Random random = new Random();
             int year = random.Next(1950,2000);
@@ -40,7 +40,7 @@ namespace TechnomarketWebSite_Automation.Core.Utilities
             return $"{month}.{day}.{year}";
         }
 
-        public string GenerateIncorrectBirthDate()
+        public string GenerateInvalidBirthDate()
         {
             Random random = new Random();
             int year = random.Next(2005, 2019);
