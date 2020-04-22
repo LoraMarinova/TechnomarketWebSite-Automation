@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Factories\" />
-    <Folder Include="Models\" />
     <Folder Include="Pages\LoginPage\" />
     <Folder Include="Pages\MobilePhonesPage\" />
     <Folder Include="Pages\RegistrationPage\" />

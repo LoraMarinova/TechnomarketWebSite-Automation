@@ -17,7 +17,13 @@ namespace TechnomarketWebSite_Automation
 {
     [TestFixture]
     public class MainPageTests : BaseTests
-    { 
+    {
+
+        [SetUp]
+        public void SetUp()
+        {
+            
+        }
         [Test]
         public void VerifyMainPageTitle()
         {            
