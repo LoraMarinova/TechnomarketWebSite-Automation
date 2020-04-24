@@ -31,5 +31,13 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
                 return browser.FindElement(By.XPath("//tm-logo//img[@alt='Техномаркет']"));
             }
         }
+
+        public IWebElement ProfileButton
+        {
+            get
+            {
+                return browser.FindElement(By.XPath("//tm-profile-header-widget"));
+            }
+        }
     }
 }

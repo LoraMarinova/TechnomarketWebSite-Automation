@@ -1,5 +1,6 @@
 ﻿
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using TechnomarketWebSite_Automation.Enums;
 
@@ -9,8 +10,14 @@ namespace TechnomarketWebSite_Automation.Core
        where M : BasePageElementMap, new()
     {
         protected readonly string url;
+        protected Actions action;
 
+        public BasePage()
+        {
+            this.action = new Actions(Driver.Browser);
+        }
         public BasePage(string url)
+            :this()
         {
             this.url = url;
         }
@@ -75,6 +82,10 @@ namespace TechnomarketWebSite_Automation.Core
             {
                 checkBox.Click();
             }
+        }
+        public void Click(IWebElement element)
+        {
+            element.Click();
         }
 
         

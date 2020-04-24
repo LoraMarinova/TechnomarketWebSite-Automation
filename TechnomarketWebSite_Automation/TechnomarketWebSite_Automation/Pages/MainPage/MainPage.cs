@@ -23,7 +23,13 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
         public void GoToCart()
         {
             this.Map.CartButton.Click();
-        }    
+        }  
+        
+        public void Logout()
+        {
+            Click(this.Map.ProfileButton);
+
+        }
 
     }
 }

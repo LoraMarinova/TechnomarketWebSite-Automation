@@ -37,9 +37,27 @@ namespace TechnomarketWebSite_Automation.Pages.RegistrationPage
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//tm-register/div//span[@class='mat-select-placeholder ng-tns-c189-39 ng-star-inserted']"));
+                    ("//tm-register/div//mat-select[@placeholder='Обръщение']/div"));
             }
         }
+        public IWebElement SalutationMr
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                    ("//span[text()[contains(.,'Господин')]]"));
+            }
+        }
+
+        public IWebElement SalutationMs
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                    ("//span[text()[contains(.,'Госпожа')]]"));
+            }
+        }
+
         public IWebElement FirstNameInputField
         {
             get
