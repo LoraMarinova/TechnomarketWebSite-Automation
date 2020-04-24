@@ -15,7 +15,7 @@ namespace TechnomarketWebSite_Automation.Core
                 return new M();
             }
         }
-
         
+
     }
 }

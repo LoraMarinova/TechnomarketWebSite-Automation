@@ -23,7 +23,7 @@ namespace TechnomarketWebSite_Automation.Core
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            Driver.StartBrowser();
+           /* Driver.StartBrowser();
             Driver.Browser.Manage().Window.Maximize();
             this.mainPage = new MainPage();
             this.profilePage = new ProfilePage();
@@ -33,7 +33,7 @@ namespace TechnomarketWebSite_Automation.Core
             this.registrationPage.NavigateToRegistrationPage();
             this.registrationPage.RegisterUser(registeredUser);
             this.profilePage.Logout();
-            Driver.StopBrowser();
+            Driver.StopBrowser();*/
         }
 
         [SetUp]

@@ -36,12 +36,12 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             }
         }
 
-        public IWebElement LoginButtonInLoginPopUp
+        public IWebElement LoginButtonOnLoginPopUp
         {
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//tm-login/div//span[ text()[contains(.,'Вход')]]"));
+                    ("//tm-login/div//button/span[ text()[contains(.,'Вход')]]/.."));
             }
         }
 
@@ -54,6 +54,24 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             }
         }
 
+        public IWebElement EmailIcon
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                    ("//tm-login/div//mat-icon[text()[contains(.,'email')]]"));
+            }
+        }
+
+        public IWebElement LockIcon
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                    ("//tm-login/div//mat-icon[text()[contains(.,'lock')]]"));
+            }
+        }
+
         public IWebElement PasswordInputField
         {
             get
@@ -63,7 +81,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             }
         }
 
-        public IWebElement TitleOfLoginPopUp
+        public IWebElement HeaderOfLoginPopUp
         {
             get
             {

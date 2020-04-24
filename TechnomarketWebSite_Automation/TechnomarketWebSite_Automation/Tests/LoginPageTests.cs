@@ -14,6 +14,7 @@ namespace TechnomarketWebSite_Automation.Tests
         //and use OneTimeSetUo user
         public LoginPageTests()
         {
+            this.registeredUser = new User();
             this.registeredUser.Email = "abcd@yopmail.com";
             this.registeredUser.Password = "123456";
             this.registeredUser.Salutation = "Господин";
@@ -26,9 +27,74 @@ namespace TechnomarketWebSite_Automation.Tests
         }
         
         [Test]
-        public void Test1()
+        public void VerifyUserCanAccessLoginPage()
         {
-            Assert.True(true);
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();            
+        }
+
+        [Test]
+        public void VerifyHeaderOfLoginPage()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyLoginPopUpHeader();
+        }       
+
+        [Test]
+        public void VerifyRequiredElementsAreDisplayedOnLoginPage()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyEmailInputFieldIsDisplayd();
+            loginPage.Validate().VerifyEmailIconIsDisplayd();
+            loginPage.Validate().VerifyPasswordInputFieldIsDisplayd();
+            loginPage.Validate().VerifyLockIconIsDisplayd();
+            loginPage.Validate().VerifyLoginButtonIsDisplayd();
+            loginPage.Validate().VerifyRegistrationButtonIsDisplayd();
+            loginPage.Validate().VerifyForgottenPasswordButtonIsDisplayd();
+        }
+
+        [Test]
+        public void VerifyEmailAndPasswordInputFieldsAreClickable()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyEmailInputFieldIsClickable();
+            loginPage.Validate().VerifyPasswordInputFieldIsClickable();
+        }
+
+        [Test]
+        public void VerifyIfEmailAndPasswordFieldsAreEmptyLoginButtonIsNotClickableAndGrey()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyLoginButtonIsNotClickable();
+            loginPage.Validate().VerifyLoginButtonIsGrey();
+        }
+
+        [Test]
+        public void VerifyIfEmailFieldIsEmptyLoginButtonIsNotClickableAndGrey()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.Validate().VerifyLoginButtonIsNotClickable();
+            loginPage.Validate().VerifyLoginButtonIsGrey();
+        }
+
+        [Test]
+        public void VerifyIfPasswordFieldIsEmptyLoginButtonIsNotClickableAndGrey()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.Validate().VerifyLoginButtonIsNotClickable();
+            loginPage.Validate().VerifyLoginButtonIsGrey();
+        }
+
+        [Test]
+        public void VerifyIfEmailAndPasswordFieldsAreFilledLoginButtonIsClickableAndRed()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.Validate().VerifyLoginButtonIsClickable();
+            loginPage.Validate().VerifyLoginButtonIsRed();
         }
     }
 }
