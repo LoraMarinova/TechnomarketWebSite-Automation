@@ -46,5 +46,19 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         {
             Type(this.Map.PasswordInputField, pass);
         }
+        public void PressTabKey()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            activeElement.SendKeys(Keys.Tab);
+        }
+
+        public void PressTabPlusShiftKeys()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            //action.KeyDown(Keys.Shift).SendKeys(Keys.Tab).KeyUp(Keys.Shift).Perform();
+            activeElement.SendKeys(Keys.Shift + Keys.Tab);
+        }
+
+
     }
 }

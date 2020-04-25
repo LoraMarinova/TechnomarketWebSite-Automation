@@ -13,6 +13,14 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             Assert.True(Map.LoginPopup.Displayed);
         }
 
+        public void VerifyLoginPopUpSizeIsCorrect()
+        {
+            int actualHeight = Map.LoginPopup.Size.Height;
+            int actualWidth = Map.LoginPopup.Size.Width;
+            Assert.AreEqual(360, actualHeight, $"Expected height of Login PopUp is 360, but it was {actualHeight}");
+            Assert.AreEqual(355, actualWidth, $"Expected width of Login PopUp is 355, but it was {actualWidth}");
+        }
+
         public void VerifyLoginPopUpHeader()
         {
             Assert.True(Map.HeaderOfLoginPopUp.Displayed);            
@@ -20,7 +28,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         }
 
         public void VerifyEmailInputFieldIsDisplayd()
-        {
+        {           
             Assert.True(Map.EmailInputField.Displayed, "Email Input Field is not displayed on the Login page");
         }
 
@@ -85,6 +93,45 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         {
             string IsDisabled = Map.LoginButtonOnLoginPopUp.GetAttribute("disabled");
             Assert.AreEqual(null, IsDisabled, "LoginButtonIsNotClickable");
+        }
+
+
+        public void VerifyRegistrationButtonIsClickable()
+        {
+            Assert.True(Map.RegistrationButton.Enabled);
+            string IsDisabled = Map.RegistrationButton.GetAttribute("disabled");
+            Assert.AreEqual(null, IsDisabled);
+        }
+
+        public void VerifyForgottenPasswordButtonIsClickable()
+        {
+            Assert.True(Map.ForgottenPasswordButton.Enabled);
+            string IsDisabled = Map.ForgottenPasswordButton.GetAttribute("disabled");
+            Assert.AreEqual(null, IsDisabled);
+        }
+
+
+        public void VerifyEmailInputFieldIsActive()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            Assert.AreEqual(Map.EmailInputField, activeElement, "Email input field is not active");
+        }
+
+        public void VerifyPasswordInputFieldIsActive()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            Assert.AreEqual(Map.PasswordInputField, activeElement, "Password input field is not active");
+        }
+
+        public void VerifyRegistrationButtonIsActive()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            Assert.AreEqual(Map.RegistrationButton, activeElement, "Register button is not active");
+        }
+        public void VerifyForgottenPasswordButtonIsActive()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            Assert.AreEqual(Map.ForgottenPasswordButton, activeElement, "Forgotten password button is not active");
         }
     }
 }

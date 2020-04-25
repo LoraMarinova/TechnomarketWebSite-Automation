@@ -14,7 +14,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//tm-login/div"));
+                    ("//tm-login/div/../.."));
             }
         }
 
@@ -23,7 +23,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//tm-login/div//span[ text()[contains(.,'Регистрация')]]"));
+                    ("//tm-login/div//span[ text()[contains(.,'Регистрация')]]/.."));                
             }
         }
 
@@ -32,7 +32,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//tm-login/div//span[ text()[contains(.,'Забравена парола')]]"));
+                    ("//tm-login/div//span[ text()[contains(.,'Забравена парола')]]/.."));
             }
         }
 
@@ -50,7 +50,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//tm-login/div//input[@formcontrolname='email']"));
+                    ("//tm-login/div/../..//tm-login/div//input[@formcontrolname='email']"));
             }
         }
 

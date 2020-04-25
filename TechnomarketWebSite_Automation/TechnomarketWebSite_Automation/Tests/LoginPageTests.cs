@@ -34,6 +34,14 @@ namespace TechnomarketWebSite_Automation.Tests
         }
 
         [Test]
+        public void VerifySizeOfLoginPagePopUp()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyLoginPopUpSizeIsCorrect();
+        }
+
+
+        [Test]
         public void VerifyHeaderOfLoginPage()
         {
             loginPage.NavigateToLoginPage();
@@ -44,13 +52,14 @@ namespace TechnomarketWebSite_Automation.Tests
         public void VerifyRequiredElementsAreDisplayedOnLoginPage()
         {
             loginPage.NavigateToLoginPage();
-            loginPage.Validate().VerifyEmailInputFieldIsDisplayd();
-            loginPage.Validate().VerifyEmailIconIsDisplayd();
-            loginPage.Validate().VerifyPasswordInputFieldIsDisplayd();
-            loginPage.Validate().VerifyLockIconIsDisplayd();
-            loginPage.Validate().VerifyLoginButtonIsDisplayd();
-            loginPage.Validate().VerifyRegistrationButtonIsDisplayd();
-            loginPage.Validate().VerifyForgottenPasswordButtonIsDisplayd();
+           
+                loginPage.Validate().VerifyEmailInputFieldIsDisplayd();
+                loginPage.Validate().VerifyEmailIconIsDisplayd();
+                loginPage.Validate().VerifyPasswordInputFieldIsDisplayd();
+                loginPage.Validate().VerifyLockIconIsDisplayd();
+                loginPage.Validate().VerifyLoginButtonIsDisplayd();
+                loginPage.Validate().VerifyRegistrationButtonIsDisplayd();
+                loginPage.Validate().VerifyForgottenPasswordButtonIsDisplayd();            
         }
 
         [Test]
@@ -95,6 +104,46 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.TypePassword(registeredUser.Password);
             loginPage.Validate().VerifyLoginButtonIsClickable();
             loginPage.Validate().VerifyLoginButtonIsRed();
+        }
+
+        [Test]
+        public void VerifyRegistrationButtonIsClickable()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyRegistrationButtonIsClickable();            
+        }
+
+        [Test]
+        public void VerifyForgottenButtonIsClickable()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyRegistrationButtonIsClickable();
+        }
+
+        [Test]
+        public void VerifyWhenUserOpenLoginPageTheCursorIsInEmailInputField()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyEmailInputFieldIsActive();
+        }
+
+        [Test]
+        public void VerifyWhenUserCanNavigateThrowghtTheLoginPageUsingTabsKeyAndKeyPlusShift()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyEmailInputFieldIsActive();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyPasswordInputFieldIsActive();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyRegistrationButtonIsActive();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyForgottenPasswordButtonIsActive();
+            loginPage.PressTabPlusShiftKeys();
+            loginPage.Validate().VerifyRegistrationButtonIsActive();
+            loginPage.PressTabPlusShiftKeys();
+            loginPage.Validate().VerifyPasswordInputFieldIsActive();
+            loginPage.PressTabPlusShiftKeys();
+            loginPage.Validate().VerifyEmailInputFieldIsActive();            
         }
     }
 }
