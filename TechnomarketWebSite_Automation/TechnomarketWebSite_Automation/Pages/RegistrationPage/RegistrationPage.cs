@@ -20,7 +20,8 @@ namespace TechnomarketWebSite_Automation.Pages.RegistrationPage
         public void NavigateToRegistrationPage()
         {
             Driver.Browser.Navigate().GoToUrl(this.url);
-            Driver.BrowserWait.Until(driver1 => ((IJavaScriptExecutor)Driver.Browser).ExecuteScript("return document.readyState").Equals("complete"));
+            Driver.BrowserWait.Until(driver1 => (js).ExecuteScript("return document.readyState").Equals("complete"));
+            Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-register/div//h2")));
         }
 
         private void ClickLoginButton()

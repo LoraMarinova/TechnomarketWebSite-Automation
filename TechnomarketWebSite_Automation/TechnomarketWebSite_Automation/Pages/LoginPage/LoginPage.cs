@@ -22,6 +22,8 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-login/div//h2")));
         }
 
+        
+
         public void ClickLoginButton()
         {
             this.Map.LoginButtonOnLoginPopUp.Click();
@@ -54,10 +56,16 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
 
         public void PressTabPlusShiftKeys()
         {
-            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
-            //action.KeyDown(Keys.Shift).SendKeys(Keys.Tab).KeyUp(Keys.Shift).Perform();
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();           
             activeElement.SendKeys(Keys.Shift + Keys.Tab);
         }
+        public void PressEnterKey()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            activeElement.SendKeys(Keys.Enter);
+        }
+
+        
 
 
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TechnomarketWebSite_Automation.Core;
 
 namespace TechnomarketWebSite_Automation.Pages.LoginPage
@@ -10,6 +11,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
     {
         public void VerifyLoginPopUpIsDisplayed()
         {
+            Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-login/div//h2")));
             Assert.True(Map.LoginPopup.Displayed);
         }
 

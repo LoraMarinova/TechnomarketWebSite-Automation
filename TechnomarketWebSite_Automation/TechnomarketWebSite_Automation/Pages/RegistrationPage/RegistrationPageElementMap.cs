@@ -13,7 +13,7 @@ namespace TechnomarketWebSite_Automation.Pages.RegistrationPage
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//tm-register/div"));
+                    ("//tm-register/div/../.."));
             }
         }
         public IWebElement EmailInputField
@@ -141,7 +141,7 @@ namespace TechnomarketWebSite_Automation.Pages.RegistrationPage
             }
         }
 
-        public IWebElement RegistrationPopUpTitle
+        public IWebElement RegistrationPopUpHeader
         {
             get
             {

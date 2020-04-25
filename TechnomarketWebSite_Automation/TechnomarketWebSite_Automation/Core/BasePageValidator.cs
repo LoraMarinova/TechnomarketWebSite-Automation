@@ -7,20 +7,12 @@ namespace TechnomarketWebSite_Automation.Core
     public class BasePageValidator<M>
         where M : BasePageElementMap, new()
     {
-      protected  IJavaScriptExecutor js;
-        public BasePageValidator()
-        {
-            this.js = ((IJavaScriptExecutor)Driver.Browser);
-        }        
-
         protected M Map
         {
             get
             {
                 return new M();
             }
-        }
-        
-
+        } 
     }
 }

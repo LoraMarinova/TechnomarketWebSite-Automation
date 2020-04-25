@@ -5,6 +5,7 @@ using TechnomarketWebSite_Automation.Core;
 using NUnit.Framework;
 using TechnomarketWebSite_Automation.Models;
 using TechnomarketWebSite_Automation.Factories;
+using System.Threading;
 
 namespace TechnomarketWebSite_Automation.Tests
 {
@@ -128,7 +129,7 @@ namespace TechnomarketWebSite_Automation.Tests
         }
 
         [Test]
-        public void VerifyWhenUserCanNavigateThrowghtTheLoginPageUsingTabsKeyAndKeyPlusShift()
+        public void VerifyUserCanNavigateThrowghtTheLoginPageUsingTabAndShiftKeys()
         {
             loginPage.NavigateToLoginPage();
             loginPage.Validate().VerifyEmailInputFieldIsActive();
@@ -144,6 +145,32 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.Validate().VerifyPasswordInputFieldIsActive();
             loginPage.PressTabPlusShiftKeys();
             loginPage.Validate().VerifyEmailInputFieldIsActive();            
+        }
+
+
+        [Test]
+        public void VerifyUserCanNavigateThrowghtTheLoginPageUsingTabAndEnterKeys()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyEmailInputFieldIsActive();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyPasswordInputFieldIsActive();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyRegistrationButtonIsActive();
+            loginPage.PressEnterKey();
+            registrationPage.Validate().VerifyRegistrationPopUpIsDisplayed();           
+            loginPage.NavigateBack();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            Thread.Sleep(1000);
+            loginPage.Validate().VerifyEmailInputFieldIsActive();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyPasswordInputFieldIsActive();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyRegistrationButtonIsActive();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyForgottenPasswordButtonIsActive();
+            loginPage.PressEnterKey();
+            forgottenPasswordPage.Validate().VerifyForgottenPasswordPopUpIsDisplayed();
         }
     }
 }

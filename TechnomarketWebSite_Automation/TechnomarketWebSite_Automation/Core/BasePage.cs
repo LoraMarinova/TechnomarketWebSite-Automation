@@ -11,10 +11,12 @@ namespace TechnomarketWebSite_Automation.Core
     {
         protected readonly string url;
         protected Actions action;
+        protected IJavaScriptExecutor js;
 
         public BasePage()
         {
             this.action = new Actions(Driver.Browser);
+            this.js = ((IJavaScriptExecutor)Driver.Browser);
         }
         public BasePage(string url)
             :this()
@@ -88,12 +90,17 @@ namespace TechnomarketWebSite_Automation.Core
             element.Click();
         }
 
-        
+        public void NavigateBack()
+        {
+            Driver.Browser.Navigate().Back();
+        }
 
 
 
 
 
-}
+
+
+    }
 
 }

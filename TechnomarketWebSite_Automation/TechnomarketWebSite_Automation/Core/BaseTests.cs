@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using TechnomarketWebSite_Automation.Factories;
 using TechnomarketWebSite_Automation.Models;
+using TechnomarketWebSite_Automation.Pages.ForgottenPasswordPage;
 using TechnomarketWebSite_Automation.Pages.LoginPage;
 using TechnomarketWebSite_Automation.Pages.MainPage;
 using TechnomarketWebSite_Automation.Pages.ProfilePage;
@@ -19,6 +20,7 @@ namespace TechnomarketWebSite_Automation.Core
         protected ProfilePage profilePage;
         protected UserFactory userFactory;
         protected User registeredUser;
+        protected ForgottenPasswordPage forgottenPasswordPage;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -45,6 +47,7 @@ namespace TechnomarketWebSite_Automation.Core
             this.loginPage = new LoginPage();
             this.profilePage = new ProfilePage();
             this.registrationPage = new RegistrationPage();
+            this.forgottenPasswordPage = new ForgottenPasswordPage();
             this.userFactory = new UserFactory();
 
         }
