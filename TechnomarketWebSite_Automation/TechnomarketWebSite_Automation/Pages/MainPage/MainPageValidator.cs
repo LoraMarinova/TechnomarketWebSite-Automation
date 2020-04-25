@@ -16,5 +16,15 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
         {
             Assert.True(this.Map.TehnomarketLogoOnTheMainPage.Displayed);
         }
+
+        public void VerifyProfileButtonIsDisplayed()
+        {
+            Assert.True(this.Map.ProfileButton.Displayed);
+        }
+
+        public void VerifyProfileUserIsLoggedIn(string email)
+        {
+            Assert.AreEqual(email+"person", Map.ProfileButton.Text);
+        }
     }
 }

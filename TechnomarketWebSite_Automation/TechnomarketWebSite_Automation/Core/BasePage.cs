@@ -95,7 +95,11 @@ namespace TechnomarketWebSite_Automation.Core
             Driver.Browser.Navigate().Back();
         }
 
-
+        public void TypeInActiveField(string text)
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            activeElement.SendKeys(text);
+        }
 
 
 

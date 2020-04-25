@@ -172,5 +172,20 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.PressEnterKey();
             forgottenPasswordPage.Validate().VerifyForgottenPasswordPopUpIsDisplayed();
         }
+
+        [Test]
+        public void VerifyUserCanLoginNavigatingOnlyWihtKeys()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeInActiveField(registeredUser.Email);            
+            loginPage.PressTabKey();
+            loginPage.TypeInActiveField(registeredUser.Password);
+            loginPage.PressTabKey();            
+            loginPage.Validate().VerifyLoginButtonIsActive();
+            loginPage.PressEnterKey();
+            Thread.Sleep(1000);
+            mainPage.Validate().VerifyProfileButtonIsDisplayed();
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+        }
     }
 }

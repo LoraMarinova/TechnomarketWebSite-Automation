@@ -135,5 +135,12 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
             Assert.AreEqual(Map.ForgottenPasswordButton, activeElement, "Forgotten password button is not active");
         }
+
+
+        public void VerifyLoginButtonIsActive()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            Assert.AreEqual(Map.LoginButtonOnLoginPopUp, activeElement, "Login Button is not active");
+        }
     }
 }
