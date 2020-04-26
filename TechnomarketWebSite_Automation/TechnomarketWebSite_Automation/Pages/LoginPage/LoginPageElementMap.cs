@@ -89,5 +89,14 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
                     ("//tm-login/div//h2"));
             }
         }
+
+        public IWebElement ErrorMessageOnLoginPage
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                    ("//tm-login/div//div[@class='error ng-star-inserted']"));
+            }
+        }
     }
 }

@@ -6,6 +6,9 @@ using NUnit.Framework;
 using TechnomarketWebSite_Automation.Models;
 using TechnomarketWebSite_Automation.Factories;
 using System.Threading;
+using NUnit.Framework.Interfaces;
+using System.IO;
+using OpenQA.Selenium;
 
 namespace TechnomarketWebSite_Automation.Tests
 {
@@ -160,8 +163,8 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.PressEnterKey();
             registrationPage.Validate().VerifyRegistrationPopUpIsDisplayed();           
             loginPage.NavigateBack();
-            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
             Thread.Sleep(1000);
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();            
             loginPage.Validate().VerifyEmailInputFieldIsActive();
             loginPage.PressTabKey();
             loginPage.Validate().VerifyPasswordInputFieldIsActive();
@@ -182,10 +185,31 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.TypeInActiveField(registeredUser.Password);
             loginPage.PressTabKey();            
             loginPage.Validate().VerifyLoginButtonIsActive();
-            loginPage.PressEnterKey();
-            Thread.Sleep(1000);
+            loginPage.PressEnterKey();            
             mainPage.Validate().VerifyProfileButtonIsDisplayed();
             mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+        }
+
+        [Test]
+        public void VerifyUserCanLoginSuccessfullyWithCorrectEmailAndPassword()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();            
+            mainPage.Validate().VerifyProfileButtonIsDisplayed();
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+        }
+
+        [Test]
+        public void VerifyUserCannotLoginWithNotExistingEmailAndPasswordAndProperMessageIsDisplayed()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(randomGenerator.GenerateEmail(dateTimeNow));
+            loginPage.TypePassword(randomGenerator.GeneratePassword(dateTimeNow));
+            loginPage.ClickLoginButton();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            loginPage.Validate().VerifyProperErrorMessageIsDisplayed();
         }
     }
 }

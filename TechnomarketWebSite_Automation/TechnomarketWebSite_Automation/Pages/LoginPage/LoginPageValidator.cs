@@ -142,5 +142,11 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
             Assert.AreEqual(Map.LoginButtonOnLoginPopUp, activeElement, "Login Button is not active");
         }
+
+        public void VerifyProperErrorMessageIsDisplayed()
+        {            
+            Assert.True(Map.ErrorMessageOnLoginPage.Displayed, "Error message is not displayed when login is not successful");
+            Assert.AreEqual("Възникна грешка", Map.ErrorMessageOnLoginPage.Text, "Incorrect text of error message");
+        }
     }
 }

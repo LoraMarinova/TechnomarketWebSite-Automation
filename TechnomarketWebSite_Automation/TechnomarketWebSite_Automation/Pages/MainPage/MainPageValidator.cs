@@ -1,6 +1,7 @@
 ﻿using TechnomarketWebSite_Automation.Core;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace TechnomarketWebSite_Automation.Pages.MainPage
 {
@@ -19,6 +20,7 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
 
         public void VerifyProfileButtonIsDisplayed()
         {
+            Driver.BrowserWait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//tm-login/div/../..")));
             Assert.True(this.Map.ProfileButton.Displayed);
         }
 

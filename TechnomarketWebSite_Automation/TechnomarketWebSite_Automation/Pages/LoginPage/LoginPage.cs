@@ -3,6 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using TechnomarketWebSite_Automation.Core;
 
 namespace TechnomarketWebSite_Automation.Pages.LoginPage
@@ -27,6 +28,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         public void ClickLoginButton()
         {
             this.Map.LoginButtonOnLoginPopUp.Click();
+            Thread.Sleep(1000);
         }
 
         public void ClickRegistrationButton()
