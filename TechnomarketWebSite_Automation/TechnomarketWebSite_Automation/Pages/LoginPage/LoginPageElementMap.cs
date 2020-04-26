@@ -23,7 +23,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//tm-login/div//span[ text()[contains(.,'Регистрация')]]/.."));                
+                    ("//tm-login/div//span[ text()[contains(.,'Регистрация')]]/.."));
             }
         }
 
@@ -54,6 +54,16 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             }
         }
 
+        public IWebElement LineUnderEmailInputField
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                  ("//tm-login//form//input[@placeholder='Адрес на електронна поща']/../../../div/span/.."));
+                //("//tm-login//form//input[@placeholder='Адрес на електронна поща']/../../../div/span"));                
+            }
+        }
+
         public IWebElement EmailIcon
         {
             get
@@ -78,6 +88,15 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             {
                 return browser.FindElement(By.XPath
                     ("//tm-login/div//input[@formcontrolname='password']"));
+            }
+        }
+
+        public IWebElement LineUnderPasswordInputField
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                    ("//tm-login//form//input[@placeholder='Парола']/../../../div/span/.."));
             }
         }
 

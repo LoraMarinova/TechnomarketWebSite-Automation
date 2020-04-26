@@ -29,12 +29,12 @@ namespace TechnomarketWebSite_Automation.Tests
             this.registeredUser.AgreeToProcessPersonalData = true;
             this.registeredUser.AcceptTerms = true;
         }
-        
+
         [Test]
         public void VerifyUserCanAccessLoginPage()
         {
             loginPage.NavigateToLoginPage();
-            loginPage.Validate().VerifyLoginPopUpIsDisplayed();            
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
         }
 
         [Test]
@@ -44,26 +44,25 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.Validate().VerifyLoginPopUpSizeIsCorrect();
         }
 
-
         [Test]
         public void VerifyHeaderOfLoginPage()
         {
             loginPage.NavigateToLoginPage();
             loginPage.Validate().VerifyLoginPopUpHeader();
-        }       
+        }
 
         [Test]
         public void VerifyRequiredElementsAreDisplayedOnLoginPage()
         {
             loginPage.NavigateToLoginPage();
-           
-                loginPage.Validate().VerifyEmailInputFieldIsDisplayd();
-                loginPage.Validate().VerifyEmailIconIsDisplayd();
-                loginPage.Validate().VerifyPasswordInputFieldIsDisplayd();
-                loginPage.Validate().VerifyLockIconIsDisplayd();
-                loginPage.Validate().VerifyLoginButtonIsDisplayd();
-                loginPage.Validate().VerifyRegistrationButtonIsDisplayd();
-                loginPage.Validate().VerifyForgottenPasswordButtonIsDisplayd();            
+
+            loginPage.Validate().VerifyEmailInputFieldIsDisplayd();
+            loginPage.Validate().VerifyEmailIconIsDisplayd();
+            loginPage.Validate().VerifyPasswordInputFieldIsDisplayd();
+            loginPage.Validate().VerifyLockIconIsDisplayd();
+            loginPage.Validate().VerifyLoginButtonIsDisplayd();
+            loginPage.Validate().VerifyRegistrationButtonIsDisplayd();
+            loginPage.Validate().VerifyForgottenPasswordButtonIsDisplayd();
         }
 
         [Test]
@@ -99,7 +98,7 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.Validate().VerifyLoginButtonIsNotClickable();
             loginPage.Validate().VerifyLoginButtonIsGrey();
         }
-
+    
         [Test]
         public void VerifyIfEmailAndPasswordFieldsAreFilledLoginButtonIsClickableAndRed()
         {
@@ -114,7 +113,7 @@ namespace TechnomarketWebSite_Automation.Tests
         public void VerifyRegistrationButtonIsClickable()
         {
             loginPage.NavigateToLoginPage();
-            loginPage.Validate().VerifyRegistrationButtonIsClickable();            
+            loginPage.Validate().VerifyRegistrationButtonIsClickable();
         }
 
         [Test]
@@ -129,7 +128,8 @@ namespace TechnomarketWebSite_Automation.Tests
         {
             loginPage.NavigateToLoginPage();
             loginPage.Validate().VerifyEmailInputFieldIsActive();
-        }
+        }          
+            
 
         [Test]
         public void VerifyUserCanNavigateThrowghtTheLoginPageUsingTabAndShiftKeys()
@@ -147,7 +147,7 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.PressTabPlusShiftKeys();
             loginPage.Validate().VerifyPasswordInputFieldIsActive();
             loginPage.PressTabPlusShiftKeys();
-            loginPage.Validate().VerifyEmailInputFieldIsActive();            
+            loginPage.Validate().VerifyEmailInputFieldIsActive();
         }
 
 
@@ -161,10 +161,10 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.PressTabKey();
             loginPage.Validate().VerifyRegistrationButtonIsActive();
             loginPage.PressEnterKey();
-            registrationPage.Validate().VerifyRegistrationPopUpIsDisplayed();           
+            registrationPage.Validate().VerifyRegistrationPopUpIsDisplayed();
             loginPage.NavigateBack();
             Thread.Sleep(1000);
-            loginPage.Validate().VerifyLoginPopUpIsDisplayed();            
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
             loginPage.Validate().VerifyEmailInputFieldIsActive();
             loginPage.PressTabKey();
             loginPage.Validate().VerifyPasswordInputFieldIsActive();
@@ -180,12 +180,12 @@ namespace TechnomarketWebSite_Automation.Tests
         public void VerifyUserCanLoginNavigatingOnlyWihtKeys()
         {
             loginPage.NavigateToLoginPage();
-            loginPage.TypeInActiveField(registeredUser.Email);            
+            loginPage.TypeInActiveField(registeredUser.Email);
             loginPage.PressTabKey();
             loginPage.TypeInActiveField(registeredUser.Password);
-            loginPage.PressTabKey();            
+            loginPage.PressTabKey();
             loginPage.Validate().VerifyLoginButtonIsActive();
-            loginPage.PressEnterKey();            
+            loginPage.PressEnterKey();
             mainPage.Validate().VerifyProfileButtonIsDisplayed();
             mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
         }
@@ -196,11 +196,11 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.NavigateToLoginPage();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
-            loginPage.ClickLoginButton();            
+            loginPage.ClickLoginButton();
             mainPage.Validate().VerifyProfileButtonIsDisplayed();
             mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
         }
-        
+
         [Test]
         public void VerifyWhenUserIsLogedLoginButtonIsNoLongerDisplayed()
         {
@@ -208,7 +208,7 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
-            mainPage.Validate().VerifyLoginButtonIsNotDisplayed();           
+            mainPage.Validate().VerifyLoginButtonIsNotDisplayed();
         }
 
         [Test]
@@ -284,7 +284,7 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.NavigateToLoginPage();
             stopWatch.Stop();
             long actualMiliseconds = stopWatch.ElapsedMilliseconds;
-            loginPage.Validate().VerifyPageIsLoadedUnderRequiredSeconds(5000, actualMiliseconds);            
+            loginPage.Validate().VerifyPageIsLoadedUnderRequiredSeconds(5000, actualMiliseconds);
         }
 
         [Test]
@@ -309,6 +309,19 @@ namespace TechnomarketWebSite_Automation.Tests
             profilePage.Logout();
             Thread.Sleep(1000);
             mainPage.Validate().VerifyProfileButtonIsNotDisplayed();
+        }
+
+        [Test]
+        public void VerifyAfterUserIslogedOutLoginButtonIsDisplayed()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            mainPage.GoToProfile();
+            profilePage.Logout();
+            Thread.Sleep(1000);
+            mainPage.Validate().VerifyLoginButtonIsDisplayedOnTheMainPage();
         }
     }
 }

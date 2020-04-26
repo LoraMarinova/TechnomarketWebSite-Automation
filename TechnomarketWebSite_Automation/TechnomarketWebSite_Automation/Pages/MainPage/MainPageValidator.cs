@@ -44,5 +44,10 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
             Assert.That(() => Map.ProfileButton,
             Throws.Exception.With.Message.Contains("no such element: Unable to locate element:"));
         }
+
+        public void VerifyLoginButtonIsDisplayedOnTheMainPage()
+        {
+            Assert.True(this.Map.LoginButton.Displayed);
+        }
     }
 }

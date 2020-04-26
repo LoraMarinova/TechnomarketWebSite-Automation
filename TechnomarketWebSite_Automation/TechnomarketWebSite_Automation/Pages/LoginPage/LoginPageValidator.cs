@@ -81,14 +81,14 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
 
         public void VerifyLoginButtonIsGrey()
         {
-            string color = Map.LoginButtonOnLoginPopUp.GetCssValue("color");
-            Assert.AreEqual("rgba(0, 0, 0, 0.26)", color, "LoginButtonIsNotGrey");
+            string color = Map.LoginButtonOnLoginPopUp.GetCssValue("background-color");
+            Assert.AreEqual("rgba(0, 0, 0, 0.12)", color, "LoginButtonIsNotGrey");
         }
 
         public void VerifyLoginButtonIsRed()
         {
-            string color = Map.LoginButtonOnLoginPopUp.GetCssValue("color");
-            Assert.AreEqual("rgba(255, 255, 255, 1)", color, "LoginButtonIsNotGrey");
+            string color = Map.LoginButtonOnLoginPopUp.GetCssValue("background-color");
+            Assert.AreEqual("rgba(207, 0, 0, 0.58)", color, "LoginButtonIsNotRed");
         }
 
         public void VerifyLoginButtonIsClickable()
@@ -147,6 +147,42 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         {            
             Assert.True(Map.ErrorMessageOnLoginPage.Displayed, "Error message is not displayed when login is not successful");
             Assert.AreEqual("Възникна грешка", Map.ErrorMessageOnLoginPage.Text, "Incorrect text of error message");
+        }
+
+        //Doesn't work
+        public void VerifyLineUnderEmailInputFieldIsBold()
+        {
+            var style = Map.LineUnderEmailInputField.GetCssValue("overflow-x");
+            Assert.AreEqual("block", style);
+        }
+        //Doesn't work
+        public void VerifyLineUnderPasswordInputFieldIsNotBold()
+        {
+            var style = Map.LineUnderPasswordInputField.GetCssValue("display");
+            Assert.AreEqual("block", style);
+        }
+
+        public void VerifyRegistrationButtonIsWhite()
+        {
+            Assert.AreEqual("rgba(0, 0, 0, 0)", Map.RegistrationButton.GetCssValue("background-color"));
+        }
+
+        public void VerifyForgottenPasswordButtonIsWhite()
+        {
+            Assert.AreEqual("rgba(0, 0, 0, 0)", Map.ForgottenPasswordButton.GetCssValue("background-color"));
+        }
+
+
+        //Doesn't work
+        public void VerifyRegistrationButtonIsGrey()
+        {
+            Assert.AreEqual("rgba(0, 0, 0, 0.26)", Map.RegistrationButton.GetCssValue("background-color"));
+        }
+
+        //Doesn't work
+        public void VerifyForgottenPasswordButtonIsGrey()
+        {
+            Assert.AreEqual("rgba(0, 0, 0, 0.26)", Map.ForgottenPasswordButton.GetCssValue("background-color"));
         }
 
 
