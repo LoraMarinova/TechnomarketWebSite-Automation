@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,9 +23,10 @@ namespace TechnomarketWebSite_Automation.Pages.ProfilePage
 
 
         public void Logout()
-        {
-            NavigateToProfilePage();
+        {           
             Click(this.Map.ExitButton);
+            Driver.BrowserWait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//tm-profile//span[text()[contains(.,'Изход')]]")));
+
         }
 
     }

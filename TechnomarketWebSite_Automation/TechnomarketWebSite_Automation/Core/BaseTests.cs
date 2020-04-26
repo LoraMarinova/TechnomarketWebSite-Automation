@@ -13,6 +13,7 @@ using TechnomarketWebSite_Automation.Pages.RegistrationPage;
 using OpenQA.Selenium;
 using NUnit.Framework.Interfaces;
 using System.IO;
+using System.Diagnostics;
 
 namespace TechnomarketWebSite_Automation.Core
 {
@@ -28,6 +29,7 @@ namespace TechnomarketWebSite_Automation.Core
         protected RandomValuesGenerator randomGenerator;
         private const string dateTimeFormatSeconds = "ddMMyy-HHmmss";
         protected string dateTimeNow;
+        protected Stopwatch stopWatch;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -58,6 +60,7 @@ namespace TechnomarketWebSite_Automation.Core
             this.userFactory = new UserFactory();
             this.randomGenerator = new RandomValuesGenerator();
             this.dateTimeNow = DateTime.Now.ToString(dateTimeFormatSeconds);
+            this.stopWatch = new Stopwatch();
 
         }
 

@@ -12,7 +12,7 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
             get
             {
                 return browser.FindElement(By.XPath
-                    ("//a[@class='mat-raised-button mat-button-base mat-primary ng-star-inserted']//span[text()[contains(.,'Вход')]]/../.."));
+                    ("//span[text()[contains(.,'Вход')]]/../.."));
             }
         }
 
@@ -36,7 +36,7 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
         {
             get
             {
-                return browser.FindElement(By.XPath("//tm-profile-header-widget"));
+                return browser.FindElement(By.XPath("//a[@routerlink='/profile']"));
             }
         }
     }

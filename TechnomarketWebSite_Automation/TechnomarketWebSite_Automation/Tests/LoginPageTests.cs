@@ -191,7 +191,7 @@ namespace TechnomarketWebSite_Automation.Tests
         }
 
         [Test]
-        public void VerifyUserCanLoginSuccessfullyWithCorrectEmailAndPassword()
+        public void VerifyUserCanLoginSuccessfullyWithCorrectEmailAndPasswordAndUserAccountIsDisplayed()
         {
             loginPage.NavigateToLoginPage();
             loginPage.TypeEmail(registeredUser.Email);
@@ -200,9 +200,19 @@ namespace TechnomarketWebSite_Automation.Tests
             mainPage.Validate().VerifyProfileButtonIsDisplayed();
             mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
         }
+        
+        [Test]
+        public void VerifyWhenUserIsLogedLoginButtonIsNoLongerDisplayed()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            mainPage.Validate().VerifyLoginButtonIsNotDisplayed();           
+        }
 
         [Test]
-        public void VerifyUserCannotLoginWithNotExistingEmailAndPasswordAndProperMessageIsDisplayed()
+        public void VerifyUserCannotLoginWithNotExistingEmailAndPassword()
         {
             loginPage.NavigateToLoginPage();
             loginPage.TypeEmail(randomGenerator.GenerateEmail(dateTimeNow));
@@ -210,6 +220,95 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.ClickLoginButton();
             loginPage.Validate().VerifyLoginPopUpIsDisplayed();
             loginPage.Validate().VerifyProperErrorMessageIsDisplayed();
+        }
+
+        [Test]
+        public void VerifyUserCannotLoginWithExistingEmailAndWrongPassword()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(randomGenerator.GeneratePassword(dateTimeNow));
+            loginPage.ClickLoginButton();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            loginPage.Validate().VerifyProperErrorMessageIsDisplayed();
+        }
+
+        [Test]
+        public void VerifyUserCannotLoginWithExistingEmailAndPasswordContainingOnlyWiteSpaces()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword("   ");
+            loginPage.ClickLoginButton();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            loginPage.Validate().VerifyProperErrorMessageIsDisplayed();
+        }
+
+        [Test]
+        public void VerifyUserCannotLoginWithNotExistingEmailAndPasswordOfRegisteredUser()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(randomGenerator.GenerateEmail(dateTimeNow));
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            loginPage.Validate().VerifyProperErrorMessageIsDisplayed();
+        }
+
+        [Test]
+        public void VerifyUserCannotLoginWithEmailContainingOnlyWhiteSpacesAndPasswordOfRegisteredUser()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail("   ");
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            loginPage.Validate().VerifyProperErrorMessageIsDisplayed();
+        }
+
+        [Test]
+        public void VerifyUserCannotLoginWithEmailAndPasswordBothContainingOnlyWhiteSpaces()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail("   ");
+            loginPage.TypePassword("   ");
+            loginPage.ClickLoginButton();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            loginPage.Validate().VerifyProperErrorMessageIsDisplayed();
+        }
+
+        [Test]
+        public void VerifyLoginPageIsLoadedUnderFiveSecondsWhenUserOpenItDirectly()
+        {
+            stopWatch.Start();
+            loginPage.NavigateToLoginPage();
+            stopWatch.Stop();
+            long actualMiliseconds = stopWatch.ElapsedMilliseconds;
+            loginPage.Validate().VerifyPageIsLoadedUnderRequiredSeconds(5000, actualMiliseconds);            
+        }
+
+        [Test]
+        public void VerifyLoginPageIsLoadedUnderFourSecondsWhenUserOpenItFromMainPage()
+        {
+            mainPage.Navigate();
+            stopWatch.Start();
+            mainPage.GoToLogin();
+            stopWatch.Stop();
+            long actualMiliseconds = stopWatch.ElapsedMilliseconds;
+            loginPage.Validate().VerifyPageIsLoadedUnderRequiredSeconds(4000, actualMiliseconds);
+        }
+
+        [Test]
+        public void VerifyUserCanlogout()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            mainPage.GoToProfile();
+            profilePage.Logout();
+            Thread.Sleep(1000);
+            mainPage.Validate().VerifyProfileButtonIsNotDisplayed();
         }
     }
 }

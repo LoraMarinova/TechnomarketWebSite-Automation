@@ -1,6 +1,7 @@
 ﻿using TechnomarketWebSite_Automation.Pages.MainPage;
 using OpenQA.Selenium;
 using NUnit.Framework;
+using System.Threading;
 
 namespace TechnomarketWebSite_Automation.Core
 {
@@ -13,6 +14,11 @@ namespace TechnomarketWebSite_Automation.Core
             {
                 return new M();
             }
-        } 
+        }
+
+        public void VerifyPageIsLoadedUnderRequiredSeconds(long expectedMiliseconds, long actualMiliseconds)
+        {
+            Assert.True(actualMiliseconds < expectedMiliseconds, $"Page is loaded for {actualMiliseconds} miliseconds");
+        }        
     }
 }

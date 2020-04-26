@@ -100,11 +100,5 @@ namespace TechnomarketWebSite_Automation.Core
             IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
             activeElement.SendKeys(text);
         }
-
-
-
-
-
     }
-
 }

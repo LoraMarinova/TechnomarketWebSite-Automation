@@ -148,5 +148,8 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             Assert.True(Map.ErrorMessageOnLoginPage.Displayed, "Error message is not displayed when login is not successful");
             Assert.AreEqual("Възникна грешка", Map.ErrorMessageOnLoginPage.Text, "Incorrect text of error message");
         }
+
+
+
     }
 }

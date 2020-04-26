@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using TechnomarketWebSite_Automation.Core;
@@ -18,6 +20,7 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
         public void GoToLogin()
         {
             this.Map.LoginButton.Click();
+            Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-login/div//h2")));
         }
 
         public void GoToCart()
@@ -25,9 +28,11 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
             this.Map.CartButton.Click();
         }  
         
-        public void Logout()
+        public void GoToProfile()
         {
-            Click(this.Map.ProfileButton);
+            Click(Map.ProfileButton);
+            Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-profile//span[text()[contains(.,'Изход')]]")));
+
 
         }
 
