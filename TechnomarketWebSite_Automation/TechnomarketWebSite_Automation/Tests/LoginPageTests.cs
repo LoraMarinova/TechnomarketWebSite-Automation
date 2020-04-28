@@ -9,14 +9,15 @@ using System.Threading;
 using NUnit.Framework.Interfaces;
 using System.IO;
 using OpenQA.Selenium;
+using System.Linq;
 
 namespace TechnomarketWebSite_Automation.Tests
 {
     public class LoginPageTests : BaseTests
     {
-        //Use constructor till writing tests, when run entire suite commentthe constructor 
+        //Use constructor till writing tests, when run entire suite comment the constructor 
         //and use OneTimeSetUo user
-        public LoginPageTests()
+       /* public LoginPageTests()
         {
             this.registeredUser = new User();
             this.registeredUser.Email = "abcd@yopmail.com";
@@ -28,7 +29,7 @@ namespace TechnomarketWebSite_Automation.Tests
             this.registeredUser.ResivePromotionInfo = true;
             this.registeredUser.AgreeToProcessPersonalData = true;
             this.registeredUser.AcceptTerms = true;
-        }
+        }*/
 
         [Test]
         public void VerifyUserCanAccessLoginPage()
@@ -98,7 +99,7 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.Validate().VerifyLoginButtonIsNotClickable();
             loginPage.Validate().VerifyLoginButtonIsGrey();
         }
-    
+
         [Test]
         public void VerifyIfEmailAndPasswordFieldsAreFilledLoginButtonIsClickableAndRed()
         {
@@ -106,7 +107,7 @@ namespace TechnomarketWebSite_Automation.Tests
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.Validate().VerifyLoginButtonIsClickable();
-            loginPage.Validate().VerifyLoginButtonIsRed();
+            loginPage.Validate().VerifyLoginButtonIsNotGrey();
         }
 
         [Test]
@@ -128,8 +129,8 @@ namespace TechnomarketWebSite_Automation.Tests
         {
             loginPage.NavigateToLoginPage();
             loginPage.Validate().VerifyEmailInputFieldIsActive();
-        }          
-            
+        }
+
 
         [Test]
         public void VerifyUserCanNavigateThrowghtTheLoginPageUsingTabAndShiftKeys()
@@ -177,7 +178,7 @@ namespace TechnomarketWebSite_Automation.Tests
         }
 
         [Test]
-        public void VerifyUserCanLoginNavigatingOnlyWihtKeys()
+        public void VerifyUserCanLoginNavigatingOnlyByKeys()
         {
             loginPage.NavigateToLoginPage();
             loginPage.TypeInActiveField(registeredUser.Email);
@@ -322,6 +323,203 @@ namespace TechnomarketWebSite_Automation.Tests
             profilePage.Logout();
             Thread.Sleep(1000);
             mainPage.Validate().VerifyLoginButtonIsDisplayedOnTheMainPage();
+        }
+
+        [Test]
+        public void VerifyNotActiveInputFildsHaveValidPlaceHolders()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.PressTabKey();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyEmailInputFieldPlaceholderIsValid();
+            loginPage.Validate().VerifyEmailInputFieldLableIsValid();
+            loginPage.Validate().VerifyPasswordInputFieldPlaceholderIsValid();
+            loginPage.Validate().VerifyPasswordInputFieldLableIsValid();
+        }
+
+        [Test]
+        public void VerifyActiveInputFildsHaveValidLables()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyEmailInputFieldLableIsValid();
+            loginPage.PressTabKey();
+            loginPage.Validate().VerifyPasswordInputFieldLableIsValid();
+        }
+
+        [Test]
+        public void VerifyPasswordInputFieldIsTypePassword()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyPasswordInputFieldIsPasswordType();            
+        }
+
+        [Test]
+        public void VerifyUserCanCloseLoginPopupWithEscapeKey()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            loginPage.PressEscapeKey();
+            loginPage.Validate().VerifyLoginPopupIsNotDisplayed();
+        }
+
+        [Test]
+        public void VerifyUserCanCloseLoginPopupByClickingOnTheMainPage()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.Validate().VerifyLoginPopUpIsDisplayed();
+            loginPage.ClickOnRandomPlaceOnMainPage();
+            loginPage.Validate().VerifyLoginPopupIsNotDisplayed();
+        }
+
+        [Test]
+        public void VerifyUserCannotLoginWithDifferentCredentialsInTheSameBrowserAtTheSameTime()
+        {
+            loginPage.NavigateToLoginPage();
+            var firstTab = Driver.Browser.CurrentWindowHandle;
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+            mainPage.OpenNewWindow();
+            var secondTab = Driver.Browser.WindowHandles.Last();
+            Driver.Browser.SwitchTo().Window(secondTab);
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+            loginPage.NavigateToLoginPage();
+            User newRegisteredUser = userFactory.CreateUser("male", true);
+            registrationPage.NavigateToRegistrationPage();
+            registrationPage.RegisterUser(newRegisteredUser);
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(newRegisteredUser.Email);
+            Driver.Browser.SwitchTo().Window(firstTab);
+            loginPage.Refresh();
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(newRegisteredUser.Email);
+        }
+
+        [Test]
+        public void VerifyIfUserIsLogedOutHeIsLoggedOutOfTheSiteInTheSameBrowserAtTheSameTime()
+        {
+            loginPage.NavigateToLoginPage();
+            var firstTab = Driver.Browser.CurrentWindowHandle;
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+            mainPage.OpenNewWindow();
+            var secondTab = Driver.Browser.WindowHandles.Last();
+            Driver.Browser.SwitchTo().Window(secondTab);
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+            mainPage.GoToProfile();
+            profilePage.Logout();
+            mainPage.Validate().VerifyProfileButtonIsNotDisplayed();
+            mainPage.Validate().VerifyLoginButtonIsDisplayedOnTheMainPage();
+            Driver.Browser.SwitchTo().Window(firstTab);
+            loginPage.Refresh();
+            mainPage.Validate().VerifyProfileButtonIsNotDisplayed();
+            mainPage.Validate().VerifyLoginButtonIsDisplayedOnTheMainPage();
+        }
+
+        [Test]
+        public void VerifyByClickinBackUserIsNotLoggedInAfterSuccessfulLogOut()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+            mainPage.GoToProfile();
+            profilePage.Logout();
+            Driver.Browser.Navigate().Back();
+            mainPage.Validate().VerifyProfileButtonIsNotDisplayed();
+            mainPage.Validate().VerifyLoginButtonIsDisplayedOnTheMainPage();
+        }
+
+        [Test]
+        public void VerifyByClickinBackUserIsNotLoggedOutAfterSuccessfulLogin()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.ClickLoginButton();
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
+            mainPage.Validate().VerifyLoginButtonIsNotDisplayed();
+            Driver.Browser.Navigate().Back();
+            loginPage.PressEscapeKey();
+            mainPage.Validate().VerifyProfileButtonIsDisplayed();
+            mainPage.Validate().VerifyLoginButtonIsNotDisplayed();
+        }
+
+        [Test]
+        public void VerifyEmailCanBeCopyPastedFromLoginForm()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.CopyEmailFromLoginForm();
+            loginPage.ClickRegistrationButton();
+            registrationPage.PasteTextToEmailField();
+            registrationPage.Validate().VerifyEmailInputFieldValue(registeredUser.Email);
+        }
+
+
+        [Test]
+        public void VerifyPasswordCannotBeCopyPastedFromLofinForm()
+        {
+            loginPage.NavigateToLoginPage();
+            loginPage.TypeEmail(registeredUser.Email);
+            loginPage.TypePassword(registeredUser.Password);
+            loginPage.CopyPasswordFromLoginForm();
+            loginPage.ClickRegistrationButton();
+            registrationPage.PasteTextToEmailField();
+            registrationPage.Validate().VerifyPasswordIsNotCopied(registeredUser.Password);
+        }
+
+        [Test]
+        public void VerifyUserIsRedirectToRegistrationPageIfRegistrationButtenIsClicked()
+        {
+            loginPage.NavigateToLoginPage();                       
+            loginPage.ClickRegistrationButton();            
+            registrationPage.Validate().VerifyRegistrationPopUpIsDisplayed();
+            registrationPage.Validate().VerifyRegistrationPopUpHeader();
+        }
+
+        [Test]
+        public void VerifyUserIsRedirectToForgottenPasswordPageIfForgottenPasswordButtenIsClicked()
+        {
+            loginPage.NavigateToLoginPage();            
+            loginPage.ClickForgottenPasswordButton();
+            forgottenPasswordPage.Validate().VerifyForgottenPasswordPopUpIsDisplayed();
+            forgottenPasswordPage.Validate().VerifyForgottenPasswordHeader();
+        }
+
+        [Test]
+        public void VerifyIfUserCannotLoginWithOldPasswordAfterChangingThePasswordAndCanLoginWithNewPassword()
+        {            
+            User newRegisteredUser = userFactory.CreateUser("male", true);
+            registrationPage.NavigateToRegistrationPage();
+            registrationPage.RegisterUser(newRegisteredUser);
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(newRegisteredUser.Email);
+            string oldPassword = newRegisteredUser.Password;
+            string newDateTimeNow = DateTime.Now.ToString(dateTimeFormatSeconds);
+            string newPassword = randomGenerator.GeneratePassword(newDateTimeNow);
+            newRegisteredUser.Password = newPassword;
+            mainPage.GoToProfile();
+            Thread.Sleep(1000);
+            profilePage.ClickOnChangePasswordButton();
+            profilePage.TypeInCurrentPasswordInputFields(oldPassword);
+            profilePage.TypeInNewPasswordInputFields(newPassword);
+            profilePage.TypeInConfirmNewPasswordInputFields(newPassword);
+            profilePage.ClickOnSaveNewPassword();
+            profilePage.Logout();
+            mainPage.GoToLogin();
+            loginPage.TypeEmail(newRegisteredUser.Email);
+            loginPage.TypePassword(oldPassword);
+            loginPage.ClickLoginButton();
+            loginPage.Validate().VerifyProperErrorMessageIsDisplayed();
+            loginPage.TypeEmail(newRegisteredUser.Email);
+            loginPage.TypePassword(newPassword);
+            loginPage.ClickLoginButton();
+            mainPage.Validate().VerifyLoginButtonIsNotDisplayed();
+            mainPage.Validate().VerifyProfileButtonIsDisplayed();
+            mainPage.Validate().VerifyProfileUserIsLoggedIn(newRegisteredUser.Email);
         }
     }
 }

@@ -86,8 +86,16 @@ namespace TechnomarketWebSite_Automation.Pages.RegistrationPage
             }
             Click(this.Map.RegistrationButton);          
 
-            Driver.BrowserWait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//tm-profile-header-widget")));
+            Driver.BrowserWait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//tm-register/div/../..")));
+
         }
+
+        public void PasteTextToEmailField()
+        {
+            Map.EmailInputField.SendKeys(Keys.Control + "v");
+        }
+
+        
 
 
     }

@@ -27,14 +27,15 @@ namespace TechnomarketWebSite_Automation.Core
         protected User registeredUser;
         protected ForgottenPasswordPage forgottenPasswordPage;
         protected RandomValuesGenerator randomGenerator;
-        private const string dateTimeFormatSeconds = "ddMMyy-HHmmss";
+        protected const string dateTimeFormatSeconds = "ddMMyy-HHmmss";
         protected string dateTimeNow;
+        protected string newDateTimeNow;
         protected Stopwatch stopWatch;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-           /* Driver.StartBrowser();
+            Driver.StartBrowser();
             Driver.Browser.Manage().Window.Maximize();
             this.mainPage = new MainPage();
             this.profilePage = new ProfilePage();
@@ -43,8 +44,9 @@ namespace TechnomarketWebSite_Automation.Core
             this.registeredUser = userFactory.CreateUser("male", true);
             this.registrationPage.NavigateToRegistrationPage();
             this.registrationPage.RegisterUser(registeredUser);
+            this.mainPage.GoToProfile();
             this.profilePage.Logout();
-            Driver.StopBrowser();*/
+            Driver.StopBrowser();
         }
 
         [SetUp]
@@ -59,9 +61,8 @@ namespace TechnomarketWebSite_Automation.Core
             this.forgottenPasswordPage = new ForgottenPasswordPage();
             this.userFactory = new UserFactory();
             this.randomGenerator = new RandomValuesGenerator();
-            this.dateTimeNow = DateTime.Now.ToString(dateTimeFormatSeconds);
+            this.dateTimeNow = DateTime.Now.ToString(dateTimeFormatSeconds);            
             this.stopWatch = new Stopwatch();
-
         }
 
         [TearDown]

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using TechnomarketWebSite_Automation.Core;
+using System.Windows;
 
 namespace TechnomarketWebSite_Automation.Pages.LoginPage
 {
@@ -14,6 +15,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         public LoginPage() 
             : base(LoginPageUrl)
         {
+            
         }
 
         public void NavigateToLoginPage()
@@ -28,7 +30,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         public void ClickLoginButton()
         {
             this.Map.LoginButtonOnLoginPopUp.Click();
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
         }
 
         public void ClickRegistrationButton()
@@ -56,6 +58,12 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             activeElement.SendKeys(Keys.Tab);
         }
 
+        public void PressEscapeKey()
+        {
+            IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();
+            activeElement.SendKeys(Keys.Escape);
+        }
+
         public void PressTabPlusShiftKeys()
         {
             IWebElement activeElement = Driver.Browser.SwitchTo().ActiveElement();           
@@ -67,7 +75,27 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             activeElement.SendKeys(Keys.Enter);
         }
 
+        public void ClickOnRandomPlaceOnMainPage()
+        {
+            action.MoveByOffset(100, 100).Perform();
+            action.Click().Perform();
+        }
+
+        public void CopyEmailFromLoginForm()
+        {
+            Map.EmailInputField.SendKeys(Keys.Control + "a");
+            Map.EmailInputField.SendKeys(Keys.Control + "c");                                      
+        }
+
+        public void CopyPasswordFromLoginForm()
+        {
+            Map.PasswordInputField.SendKeys(Keys.Control + "a");
+            Map.PasswordInputField.SendKeys(Keys.Control + "c");
+        }
+
         
+
+
 
 
     }

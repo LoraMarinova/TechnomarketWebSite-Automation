@@ -54,6 +54,15 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             }
         }
 
+        public IWebElement FieldArroundEmailInputField
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                    ("//tm-login/div/../..//tm-login/div//input[@formcontrolname='email']/.."));
+            }
+        }
+
         public IWebElement LineUnderEmailInputField
         {
             get
@@ -88,6 +97,15 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             {
                 return browser.FindElement(By.XPath
                     ("//tm-login/div//input[@formcontrolname='password']"));
+            }
+        }
+
+        public IWebElement FieldArroundPasswordInputField
+        {
+            get
+            {
+                return browser.FindElement(By.XPath
+                    ("//tm-login/div//input[@formcontrolname='password']/.."));
             }
         }
 

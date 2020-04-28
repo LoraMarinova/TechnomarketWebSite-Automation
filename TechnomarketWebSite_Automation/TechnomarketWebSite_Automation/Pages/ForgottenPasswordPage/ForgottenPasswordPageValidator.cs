@@ -15,6 +15,12 @@ namespace TechnomarketWebSite_Automation.Pages.ForgottenPasswordPage
             Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-password-restore/div//h2")));
             Assert.True(Map.ForgottenPasswordPopup.Displayed);            
         }
-        
+
+        public void VerifyForgottenPasswordHeader()
+        {
+            Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-password-restore/div//h2")));
+            Assert.True(Map.ForgottenPasswordPopupHeader.Displayed);
+        }
+
     }
 }

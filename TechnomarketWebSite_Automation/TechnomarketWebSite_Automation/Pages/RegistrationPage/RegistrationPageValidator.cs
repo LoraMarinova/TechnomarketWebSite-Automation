@@ -23,5 +23,20 @@ namespace TechnomarketWebSite_Automation.Pages.RegistrationPage
             Assert.AreEqual("Регистрация в сайта на Техномаркет", Map.RegistrationPopUpHeader.Text);
         }
 
+        public void VerifyEmailInputFieldValue(string text)
+        {
+            string copyedText = Map.EmailInputField.GetAttribute("value");
+            Assert.AreEqual(text, copyedText);
+        }
+
+        public void VerifyPasswordIsNotCopied(string text)
+        {
+            string copyedText = Map.EmailInputField.GetAttribute("value");
+            Assert.AreNotEqual(text, copyedText);
+        }
+
+      
+
+
     }
 }

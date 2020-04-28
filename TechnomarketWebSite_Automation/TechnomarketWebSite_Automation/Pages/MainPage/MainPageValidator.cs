@@ -39,8 +39,7 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
 
         public void VerifyProfileButtonIsNotDisplayed()
         {
-            Thread.Sleep(1000);
-            //Assert.True(Map.ProfileButton.Displayed);
+            Thread.Sleep(1000);            
             Assert.That(() => Map.ProfileButton,
             Throws.Exception.With.Message.Contains("no such element: Unable to locate element:"));
         }
@@ -49,5 +48,9 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
         {
             Assert.True(this.Map.LoginButton.Displayed);
         }
+
+        
+
+
     }
 }

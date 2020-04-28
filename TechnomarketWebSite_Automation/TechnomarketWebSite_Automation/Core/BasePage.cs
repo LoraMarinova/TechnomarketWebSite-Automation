@@ -37,7 +37,19 @@ namespace TechnomarketWebSite_Automation.Core
             Driver.Browser.Navigate().GoToUrl(this.url);
             Driver.BrowserWait.Until(driver1 => ((IJavaScriptExecutor)Driver.Browser).ExecuteScript("return document.readyState").Equals("complete"));
         }
+
+        public void Refresh()
+        {
+            Driver.Browser.Navigate().Refresh();
+            Driver.BrowserWait.Until(driver1 => ((IJavaScriptExecutor)Driver.Browser).ExecuteScript("return document.readyState").Equals("complete"));
+        }
+
+        public void OpenNewWindow()
+        {
+            js.ExecuteScript("window.open(arguments[0])", this.url);            
+        }
     }
+    
 
     public class BasePage<M, V> : BasePage<M>
         where M : BasePageElementMap, new()

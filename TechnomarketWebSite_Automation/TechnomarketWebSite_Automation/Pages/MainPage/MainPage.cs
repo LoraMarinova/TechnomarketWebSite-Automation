@@ -32,9 +32,6 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
         {
             Click(Map.ProfileButton);
             Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-profile//span[text()[contains(.,'Изход')]]")));
-
-
-        }
-
+        }  
     }
 }

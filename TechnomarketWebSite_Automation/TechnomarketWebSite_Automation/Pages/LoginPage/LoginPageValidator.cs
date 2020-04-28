@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using TechnomarketWebSite_Automation.Core;
+using System.Windows;
 
 namespace TechnomarketWebSite_Automation.Pages.LoginPage
 {
-   public class LoginPageValidator : BasePageValidator<LoginPageElementMap>
+    public class LoginPageValidator : BasePageValidator<LoginPageElementMap>
     {
         public void VerifyLoginPopUpIsDisplayed()
         {
@@ -25,12 +27,12 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
 
         public void VerifyLoginPopUpHeader()
         {
-            Assert.True(Map.HeaderOfLoginPopUp.Displayed);            
-            Assert.AreEqual("Вход в сайта на Техномаркет", Map.HeaderOfLoginPopUp.Text);           
+            Assert.True(Map.HeaderOfLoginPopUp.Displayed);
+            Assert.AreEqual("Вход в сайта на Техномаркет", Map.HeaderOfLoginPopUp.Text);
         }
 
         public void VerifyEmailInputFieldIsDisplayd()
-        {           
+        {
             Assert.True(Map.EmailInputField.Displayed, "Email Input Field is not displayed on the Login page");
         }
 
@@ -76,7 +78,7 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         public void VerifyLoginButtonIsNotClickable()
         {
             string IsDisabled = Map.LoginButtonOnLoginPopUp.GetAttribute("disabled");
-            Assert.AreEqual("true", IsDisabled,"LoginButtonIsClickable");
+            Assert.AreEqual("true", IsDisabled, "LoginButtonIsClickable");
         }
 
         public void VerifyLoginButtonIsGrey()
@@ -85,10 +87,10 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             Assert.AreEqual("rgba(0, 0, 0, 0.12)", color, "LoginButtonIsNotGrey");
         }
 
-        public void VerifyLoginButtonIsRed()
+        public void VerifyLoginButtonIsNotGrey()
         {
             string color = Map.LoginButtonOnLoginPopUp.GetCssValue("background-color");
-            Assert.AreEqual("rgba(207, 0, 0, 0.58)", color, "LoginButtonIsNotRed");
+            Assert.AreNotEqual("(rgba(0, 0, 0, 0.12)", color, "LoginButtonIsNotRed");
         }
 
         public void VerifyLoginButtonIsClickable()
@@ -144,7 +146,8 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
         }
 
         public void VerifyProperErrorMessageIsDisplayed()
-        {            
+        {
+            Thread.Sleep(1000);
             Assert.True(Map.ErrorMessageOnLoginPage.Displayed, "Error message is not displayed when login is not successful");
             Assert.AreEqual("Възникна грешка", Map.ErrorMessageOnLoginPage.Text, "Incorrect text of error message");
         }
@@ -185,7 +188,54 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             Assert.AreEqual("rgba(0, 0, 0, 0.26)", Map.ForgottenPasswordButton.GetCssValue("background-color"));
         }
 
+        public void VerifyEmailInputFieldPlaceholderIsValid()
+        {
+            string palceholder = Map.EmailInputField.GetAttribute("placeholder");
+            Assert.AreEqual("Адрес на електронна поща", palceholder);
+        }
 
+        public void VerifyPasswordInputFieldPlaceholderIsValid()
+        {
+            string palceholder = Map.PasswordInputField.GetAttribute("placeholder");
+            Assert.AreEqual("Парола", palceholder);
+        }
+
+        public void VerifyEmailInputFieldLableIsValid()
+        {           
+            Assert.AreEqual("Адрес на електронна поща *", Map.FieldArroundEmailInputField.Text);
+        }
+
+        public void VerifyPasswordInputFieldLableIsValid()
+        {            
+            Assert.AreEqual("Парола *", Map.FieldArroundPasswordInputField.Text);
+        }
+
+        public void VerifyPasswordIsEncryptedWhenItIsEntered()
+        {
+            string value = Map.PasswordInputField.GetAttribute("value");
+            Assert.AreEqual("*****************", value);
+        }
+
+        public void VerifyPasswordInputFieldIsPasswordType()
+        {
+            string type = Map.PasswordInputField.GetAttribute("type");
+            Assert.AreEqual("password", type);
+        }
+
+        public void VerifyEmailIsNotEncryptedWhenItIsEntered(string text)
+        {
+            string value = Map.EmailInputField.GetAttribute("value");
+            Assert.AreEqual(text, value);
+        }
+
+        public void VerifyLoginPopupIsNotDisplayed()
+        {
+            Thread.Sleep(1000);
+            Assert.That(() => this.Map.LoginPopup,
+                Throws.Exception.With.Message.Contains("no such element: Unable to locate element:"));
+        }
+
+        
 
     }
 }
