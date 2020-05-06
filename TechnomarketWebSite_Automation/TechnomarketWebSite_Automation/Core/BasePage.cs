@@ -3,6 +3,9 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using TechnomarketWebSite_Automation.Enums;
+using System.Reflection;
+using System;
+using System.Linq;
 
 namespace TechnomarketWebSite_Automation.Core
 {
@@ -72,6 +75,8 @@ namespace TechnomarketWebSite_Automation.Core
 
         public void Type(IWebElement inputField, string text)
         {
+            string id = inputField.GetAttribute("id");
+            Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.Id(id)));
             inputField.Clear();
             inputField.SendKeys(text);
         }
@@ -84,6 +89,7 @@ namespace TechnomarketWebSite_Automation.Core
 
         public void SelectCheckBox(IWebElement checkBox)
         {
+            Driver.BrowserWait.Until(ExpectedConditions.ElementToBeClickable(checkBox));
             if (!checkBox.Selected)
             {
                 checkBox.Click();
@@ -92,6 +98,7 @@ namespace TechnomarketWebSite_Automation.Core
 
         public void ClearCheckBox(IWebElement checkBox)
         {
+            Driver.BrowserWait.Until(ExpectedConditions.ElementToBeClickable(checkBox));
             if (checkBox.Selected)
             {
                 checkBox.Click();
@@ -99,6 +106,7 @@ namespace TechnomarketWebSite_Automation.Core
         }
         public void Click(IWebElement element)
         {
+            Driver.BrowserWait.Until(ExpectedConditions.ElementToBeClickable(element));
             element.Click();
         }
 
