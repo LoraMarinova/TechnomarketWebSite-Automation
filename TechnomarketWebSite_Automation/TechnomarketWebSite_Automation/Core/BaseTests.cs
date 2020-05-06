@@ -42,7 +42,7 @@ namespace TechnomarketWebSite_Automation.Core
             this.registrationPage = new RegistrationPage();
             this.userFactory = new UserFactory();
             this.registeredUser = userFactory.CreateUser("male", true);
-            this.registrationPage.NavigateToRegistrationPage();
+            this.registrationPage.Navigate();
             this.registrationPage.RegisterUser(registeredUser);
             this.mainPage.GoToProfile();
             this.profilePage.Logout();
