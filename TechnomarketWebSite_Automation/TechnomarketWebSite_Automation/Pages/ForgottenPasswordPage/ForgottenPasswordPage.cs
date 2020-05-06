@@ -15,10 +15,10 @@ namespace TechnomarketWebSite_Automation.Pages.ForgottenPasswordPage
         {
         }
 
-        public void NavigateToForgottenPasswordPage()
+        public override void Navigate()
         {
             Driver.Browser.Navigate().GoToUrl(this.url);
-            Driver.BrowserWait.Until(driver1 => (js).ExecuteScript("return document.readyState").Equals("complete"));
+            Driver.BrowserWait.Until(driver1 => js.ExecuteScript("return document.readyState").Equals("complete"));
             Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-password-restore//h2")));            
         }
     }

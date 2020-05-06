@@ -34,28 +34,29 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCanAccessLoginPage()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyLoginPopUpIsDisplayed();
         }
 
         [Test]
         public void VerifySizeOfLoginPagePopUp()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyLoginPopUpSizeIsCorrect();
         }
 
         [Test]
         public void VerifyHeaderOfLoginPage()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
+            loginPage.Navigate();
             loginPage.Validate().VerifyLoginPopUpHeader();
         }
 
         [Test]
         public void VerifyRequiredElementsAreDisplayedOnLoginPage()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
 
             loginPage.Validate().VerifyEmailInputFieldIsDisplayd();
             loginPage.Validate().VerifyEmailIconIsDisplayd();
@@ -69,7 +70,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyEmailAndPasswordInputFieldsAreClickable()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyEmailInputFieldIsClickable();
             loginPage.Validate().VerifyPasswordInputFieldIsClickable();
         }
@@ -77,7 +78,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyIfEmailAndPasswordFieldsAreEmptyLoginButtonIsNotClickableAndGrey()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyLoginButtonIsNotClickable();
             loginPage.Validate().VerifyLoginButtonIsGrey();
         }
@@ -85,7 +86,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyIfEmailFieldIsEmptyLoginButtonIsNotClickableAndGrey()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.Validate().VerifyLoginButtonIsNotClickable();
             loginPage.Validate().VerifyLoginButtonIsGrey();
@@ -94,7 +95,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyIfPasswordFieldIsEmptyLoginButtonIsNotClickableAndGrey()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypePassword(registeredUser.Password);
             loginPage.Validate().VerifyLoginButtonIsNotClickable();
             loginPage.Validate().VerifyLoginButtonIsGrey();
@@ -103,7 +104,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyIfEmailAndPasswordFieldsAreFilledLoginButtonIsClickableAndRed()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.Validate().VerifyLoginButtonIsClickable();
@@ -113,21 +114,21 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyRegistrationButtonIsClickable()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyRegistrationButtonIsClickable();
         }
 
         [Test]
         public void VerifyForgottenButtonIsClickable()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyRegistrationButtonIsClickable();
         }
 
         [Test]
         public void VerifyWhenUserOpenLoginPageTheCursorIsInEmailInputField()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyEmailInputFieldIsActive();
         }
 
@@ -135,7 +136,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCanNavigateThrowghtTheLoginPageUsingTabAndShiftKeys()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyEmailInputFieldIsActive();
             loginPage.PressTabKey();
             loginPage.Validate().VerifyPasswordInputFieldIsActive();
@@ -155,7 +156,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCanNavigateThrowghtTheLoginPageUsingTabAndEnterKeys()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyEmailInputFieldIsActive();
             loginPage.PressTabKey();
             loginPage.Validate().VerifyPasswordInputFieldIsActive();
@@ -180,7 +181,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCanLoginNavigatingOnlyByKeys()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeInActiveField(registeredUser.Email);
             loginPage.PressTabKey();
             loginPage.TypeInActiveField(registeredUser.Password);
@@ -194,7 +195,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCanLoginSuccessfullyWithCorrectEmailAndPasswordAndUserAccountIsDisplayed()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
@@ -205,7 +206,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyWhenUserIsLogedLoginButtonIsNoLongerDisplayed()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
@@ -215,7 +216,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCannotLoginWithNotExistingEmailAndPassword()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(randomGenerator.GenerateEmail(dateTimeNow));
             loginPage.TypePassword(randomGenerator.GeneratePassword(dateTimeNow));
             loginPage.ClickLoginButton();
@@ -226,7 +227,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCannotLoginWithExistingEmailAndWrongPassword()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(randomGenerator.GeneratePassword(dateTimeNow));
             loginPage.ClickLoginButton();
@@ -237,7 +238,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCannotLoginWithExistingEmailAndPasswordContainingOnlyWiteSpaces()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword("   ");
             loginPage.ClickLoginButton();
@@ -248,7 +249,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCannotLoginWithNotExistingEmailAndPasswordOfRegisteredUser()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(randomGenerator.GenerateEmail(dateTimeNow));
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
@@ -259,7 +260,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCannotLoginWithEmailContainingOnlyWhiteSpacesAndPasswordOfRegisteredUser()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail("   ");
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
@@ -270,7 +271,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCannotLoginWithEmailAndPasswordBothContainingOnlyWhiteSpaces()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail("   ");
             loginPage.TypePassword("   ");
             loginPage.ClickLoginButton();
@@ -282,7 +283,7 @@ namespace TechnomarketWebSite_Automation.Tests
         public void VerifyLoginPageIsLoadedUnderFiveSecondsWhenUserOpenItDirectly()
         {
             stopWatch.Start();
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             stopWatch.Stop();
             long actualMiliseconds = stopWatch.ElapsedMilliseconds;
             loginPage.Validate().VerifyPageIsLoadedUnderRequiredSeconds(5000, actualMiliseconds);
@@ -302,7 +303,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCanlogout()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
@@ -315,7 +316,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyAfterUserIslogedOutLoginButtonIsDisplayed()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
@@ -328,7 +329,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyNotActiveInputFildsHaveValidPlaceHolders()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.PressTabKey();
             loginPage.PressTabKey();
             loginPage.Validate().VerifyEmailInputFieldPlaceholderIsValid();
@@ -340,7 +341,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyActiveInputFildsHaveValidLables()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyEmailInputFieldLableIsValid();
             loginPage.PressTabKey();
             loginPage.Validate().VerifyPasswordInputFieldLableIsValid();
@@ -349,14 +350,14 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyPasswordInputFieldIsTypePassword()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyPasswordInputFieldIsPasswordType();            
         }
 
         [Test]
         public void VerifyUserCanCloseLoginPopupWithEscapeKey()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyLoginPopUpIsDisplayed();
             loginPage.PressEscapeKey();
             loginPage.Validate().VerifyLoginPopupIsNotDisplayed();
@@ -365,7 +366,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCanCloseLoginPopupByClickingOnTheMainPage()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.Validate().VerifyLoginPopUpIsDisplayed();
             loginPage.ClickOnRandomPlaceOnMainPage();
             loginPage.Validate().VerifyLoginPopupIsNotDisplayed();
@@ -374,7 +375,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserCannotLoginWithDifferentCredentialsInTheSameBrowserAtTheSameTime()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             var firstTab = Driver.Browser.CurrentWindowHandle;
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
@@ -384,9 +385,9 @@ namespace TechnomarketWebSite_Automation.Tests
             var secondTab = Driver.Browser.WindowHandles.Last();
             Driver.Browser.SwitchTo().Window(secondTab);
             mainPage.Validate().VerifyProfileUserIsLoggedIn(registeredUser.Email);
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             User newRegisteredUser = userFactory.CreateUser("male", true);
-            registrationPage.NavigateToRegistrationPage();
+            registrationPage.Navigate();
             registrationPage.RegisterUser(newRegisteredUser);
             mainPage.Validate().VerifyProfileUserIsLoggedIn(newRegisteredUser.Email);
             Driver.Browser.SwitchTo().Window(firstTab);
@@ -397,7 +398,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyIfUserIsLogedOutHeIsLoggedOutOfTheSiteInTheSameBrowserAtTheSameTime()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             var firstTab = Driver.Browser.CurrentWindowHandle;
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
@@ -420,7 +421,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyByClickinBackUserIsNotLoggedInAfterSuccessfulLogOut()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
@@ -435,7 +436,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyByClickinBackUserIsNotLoggedOutAfterSuccessfulLogin()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.ClickLoginButton();
@@ -450,7 +451,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyEmailCanBeCopyPastedFromLoginForm()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.CopyEmailFromLoginForm();
@@ -463,7 +464,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyPasswordCannotBeCopyPastedFromLofinForm()
         {
-            loginPage.NavigateToLoginPage();
+            loginPage.Navigate();
             loginPage.TypeEmail(registeredUser.Email);
             loginPage.TypePassword(registeredUser.Password);
             loginPage.CopyPasswordFromLoginForm();
@@ -475,7 +476,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserIsRedirectToRegistrationPageIfRegistrationButtenIsClicked()
         {
-            loginPage.NavigateToLoginPage();                       
+            loginPage.Navigate();                       
             loginPage.ClickRegistrationButton();            
             registrationPage.Validate().VerifyRegistrationPopUpIsDisplayed();
             registrationPage.Validate().VerifyRegistrationPopUpHeader();
@@ -484,7 +485,7 @@ namespace TechnomarketWebSite_Automation.Tests
         [Test]
         public void VerifyUserIsRedirectToForgottenPasswordPageIfForgottenPasswordButtenIsClicked()
         {
-            loginPage.NavigateToLoginPage();            
+            loginPage.Navigate();            
             loginPage.ClickForgottenPasswordButton();
             forgottenPasswordPage.Validate().VerifyForgottenPasswordPopUpIsDisplayed();
             forgottenPasswordPage.Validate().VerifyForgottenPasswordHeader();
@@ -494,7 +495,7 @@ namespace TechnomarketWebSite_Automation.Tests
         public void VerifyIfUserCannotLoginWithOldPasswordAfterChangingThePasswordAndCanLoginWithNewPassword()
         {            
             User newRegisteredUser = userFactory.CreateUser("male", true);
-            registrationPage.NavigateToRegistrationPage();
+            registrationPage.Navigate();
             registrationPage.RegisterUser(newRegisteredUser);
             mainPage.Validate().VerifyProfileUserIsLoggedIn(newRegisteredUser.Email);
             string oldPassword = newRegisteredUser.Password;

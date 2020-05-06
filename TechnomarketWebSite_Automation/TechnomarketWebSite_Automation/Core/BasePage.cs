@@ -35,16 +35,17 @@ namespace TechnomarketWebSite_Automation.Core
             }
         }
 
-        public void Navigate()
+        public virtual void Navigate()
         {
             Driver.Browser.Navigate().GoToUrl(this.url);
-            Driver.BrowserWait.Until(driver1 => ((IJavaScriptExecutor)Driver.Browser).ExecuteScript("return document.readyState").Equals("complete"));
+            Driver.BrowserWait.Until(driver1 => js.ExecuteScript("return document.readyState").Equals("complete"));
         }
 
         public void Refresh()
         {
             Driver.Browser.Navigate().Refresh();
-            Driver.BrowserWait.Until(driver1 => ((IJavaScriptExecutor)Driver.Browser).ExecuteScript("return document.readyState").Equals("complete"));
+            Driver.BrowserWait.Until(driver1 => js.ExecuteScript("return document.readyState").Equals("complete"));
+        
         }
 
         public void OpenNewWindow()
@@ -74,7 +75,7 @@ namespace TechnomarketWebSite_Automation.Core
         }
 
         public void Type(IWebElement inputField, string text)
-        {
+        {           
             string id = inputField.GetAttribute("id");
             Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.Id(id)));
             inputField.Clear();

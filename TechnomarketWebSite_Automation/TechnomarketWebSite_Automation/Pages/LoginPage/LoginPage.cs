@@ -18,14 +18,12 @@ namespace TechnomarketWebSite_Automation.Pages.LoginPage
             
         }
 
-        public void NavigateToLoginPage()
+        public override void Navigate()
         {
             Driver.Browser.Navigate().GoToUrl(this.url);
-            Driver.BrowserWait.Until(driver1 => ((IJavaScriptExecutor)Driver.Browser).ExecuteScript("return document.readyState").Equals("complete"));
+            Driver.BrowserWait.Until(driver1 => js.ExecuteScript("return document.readyState").Equals("complete"));
             Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tm-login/div//h2")));
         }
-
-        
 
         public void ClickLoginButton()
         {

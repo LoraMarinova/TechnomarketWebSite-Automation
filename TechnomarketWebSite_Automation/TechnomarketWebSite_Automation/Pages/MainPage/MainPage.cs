@@ -15,7 +15,7 @@ namespace TechnomarketWebSite_Automation.Pages.MainPage
         public MainPage() 
             : base(MainPageUrl)
         {
-        }  
+        }
 
         public void GoToLogin()
         {
